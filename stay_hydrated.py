@@ -16,6 +16,11 @@ async def on_ready():
 
 
 @client.event
+async def on_resumed():
+    await client.change_presence(activity=discord.Game(name="keeps you staying hydrated 💦"))
+
+
+@client.event
 async def on_member_update(before, after):
     mongo_client = MongoClient()
     db = mongo_client.stayhydrated
@@ -33,7 +38,7 @@ async def on_member_update(before, after):
 @client.event
 async def on_message(message):
     help_embed = discord.Embed(title="How to stay hydrated", color=discord.colour.Color.blue(), description="Hello, I am StayHydrated a discord bot developed by Breuxi#6341\nI can help you staying hydrated by sending you timed reminders to drink some water :D But we have to be on at least one Server together :o")
-    help_embed.add_field(name="Commands", value="h-register every <Interval> <Minutes|Hours> while <online|gaming> -> Register for a hydration reminder\nh-unregister -> Unregister from your reminder", inline=False)
+    help_embed.add_field(name="Commands", value="h-register every <Interval> <Minutes|Hours> -> Register for a hydration reminder\nh-unregister -> Unregister from your reminder", inline=False)
 
     if message.author == client.user:
         return
@@ -50,7 +55,7 @@ async def on_message(message):
 
         # h-register every <Interval> <Minutes|Hours> while <online|gaming>
         if message.content.lower().startswith("h-register"):
-            if "every" in message.content.lower() and "while" in message.content.lower():
+            if "every" in message.content.lower():
                 args = message.content.split(" ")
 
                 interval = 0
@@ -85,7 +90,7 @@ async def on_message(message):
 
                 await message.channel.send("All set! You will receive your reminder every {} {} while {}".format(interval, time_type, while_doing))
             else:
-                await message.channel.send("Error, wrong format! Please use h-register every <Interval> <Minutes|Hours> while <online|gaming>")
+                await message.channel.send("Error, wrong format! Please use h-register every <Interval> <Minutes|Hours>")
 
         if message.content.lower().startswith("h-unregister"):
             mongo_client = MongoClient()
@@ -118,7 +123,6 @@ async def health_task():
 
                     async with discord_user.typing():
                         await discord_user.send("Hello, I would like to remind you to drink some water! 💦")
-            users.update_one({"uuid": user["uuid"]}, {"$inc": {'counting': 1}})
 
             if str(user['interval_type']).lower() == "hours":
                 interval = user['interval'] * 60
