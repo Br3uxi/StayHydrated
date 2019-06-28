@@ -18,7 +18,7 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-6. Create a Environment Variable called "discord_token" and store your Bot Token from the [Discord Developer Platform](http://discordapp.com/developers/applications/) in it
+6. Copy the example_config.ini to config.ini and add your Bot Token from the [Discord Developer Platform](http://discordapp.com/developers/applications/) to it
 7. Run the Main File
 ```bash
 python3 stay_hydrated.py
@@ -36,7 +36,6 @@ autostart=true
 autorestart=true
 stderr_logfile = <...>/StayHydrated/log/err.log
 stdout_logfile = <...>/StayHydrated/log/out.log
-environment=discord_token=
 ```
 Then run
 ```bash

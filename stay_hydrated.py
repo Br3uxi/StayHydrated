@@ -2,11 +2,25 @@ import discord
 import asyncio
 import re
 import os
+import sys
+import configparser
 from pymongo import MongoClient
 
 greet_re = re.compile(r'(Hello|Hi)(\?)?', re.IGNORECASE)
 
 client = discord.Client()
+
+if os.path.exists('config.ini'):
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+    if config.has_section("Discord") and config.has_option("Discord", "token"):
+        discord_token = config.get('Discord', 'token')
+    else:
+        print("No Token Provided, please add one in config.ini")
+        sys.exit(1)
+else:
+    print("The config.ini does not exist, please create it")
+    sys.exit(1)
 
 
 @client.event
@@ -137,4 +151,4 @@ async def health_task():
 
 
 client.loop.create_task(health_task())
-client.run(os.environ["discord_token"])
+client.run(discord_token)

@@ -2,4 +2,5 @@
 venv/
 .Python
 .venv
-.idea
+.idea/
+config.ini
