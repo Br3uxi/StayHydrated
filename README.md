@@ -36,6 +36,7 @@ autostart=true
 autorestart=true
 stderr_logfile = <...>/StayHydrated/log/err.log
 stdout_logfile = <...>/StayHydrated/log/out.log
+environment=discord_token=
 ```
 Then run
 ```bash
