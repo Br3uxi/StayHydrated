@@ -2,6 +2,8 @@
 A little discord bot, written for the [Discord Hack Week](https://discord.gg/hackweek) to help you stay hydrated :D
 The idea came to me while brainstorming on a topic during a big heatwave in germany.
 
+[Invite the official Bot! :D](https://discordapp.com/api/oauth2/authorize?client_id=594184011891605504&scope=bot)
+
 ## Install
 (Instructions for Linux)
 1. Download and install Python >= 3.6 and Git
